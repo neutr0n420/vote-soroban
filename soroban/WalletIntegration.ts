@@ -7,11 +7,10 @@ import {
 } from "@stellar/freighter-api"
 
 async function checkConnection() {
-    const isAllowed = await setAllowed();
-    console.log(isAllowed)
-    if (isAllowed) {
+    const connection = await isConnected();
+    if (connection) {
         console.log("Reached here in isAllowed function")
-        return isAllowed
+        return connection
     }
 }
 const testFunction = () => {

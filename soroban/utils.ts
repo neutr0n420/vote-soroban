@@ -11,7 +11,7 @@ import { userSignTransaction } from "./WalletIntegration"
 import { getPublicKey } from "@stellar/freighter-api"
 
 const rpcUrl = "https://soroban-testnet.stellar.org";
-let contractAddress = 'CB2LFGW6JEGQ6WQUJ76SS5OUZYNETTDCBO4SYLGRD57L5MZJL5W4NMTQ';
+let contractAddress = 'CDGHULHPM3QA6BPKLUTGSHPMYCNGBXYRW4OOEDGBSNGDYUTQUCP7ICDI';
 
 let params = {
     fee: BASE_FEE,
@@ -54,15 +54,20 @@ async function contractInit(caller: any, functionName: string) {
     }
 }
 async function upVote(caller: any) {
-    const increaseVote = await contractInit(caller, "up_vote")
-    console.log(increaseVote)
+    const increaseVote: any = await contractInit(caller, "up_vote")
+    console.log(increaseVote._value)
     return increaseVote
 }
 
 async function downVote(caller: any) {
-    const decreaseVote = await contractInit(caller, "down_vote")
-    console.log(decreaseVote)
+    const decreaseVote: any = await contractInit(caller, "down_vote")
     return decreaseVote
 }
+async function voteCount(caller: any) {
+    const voteCount: any = await contractInit(caller, "current_vote")
+    const voteCountToString = voteCount._value.toString()
+    // console.log(voteCountToString)
+    return voteCountToString
+}
 
-export { upVote, downVote };
+export { upVote, downVote, voteCount };
