@@ -14,4 +14,5 @@ fn vote_test() {
     log!(&env, "Upvote done");
     assert_eq!(client.down_vote(), 1);
     assert_eq!(client.down_vote(), 0);
+    log!(&env,"{}" ,client.current_vote())
 }

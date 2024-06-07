@@ -10,7 +10,6 @@ impl VoteContract {
         let mut votes:i32 = env.storage().instance().get(&VOTE).unwrap_or(0);
         votes +=1;
 
-        log!(&env, "New Vote added: {}", votes);
         env.storage().instance().set(&VOTE, &votes);
 
         env.storage().instance().extend_ttl(100, 100);
@@ -18,7 +17,6 @@ impl VoteContract {
     }
     pub fn down_vote(env: Env) -> i32  {
         let mut votes = env.storage().instance().get(&VOTE).unwrap_or(0);
-        log!(&env, "Current Vote: {}", votes);
 
         votes -=1;
         log!(&env, "Removed a vote: {}", votes);
@@ -27,6 +25,10 @@ impl VoteContract {
 
         env.storage().instance().extend_ttl(100, 100);
         votes
+    }
+    pub fn current_vote(env:Env) -> i32 {
+        let current_votes = env.storage().instance().get(&VOTE).unwrap_or(0);
+        current_votes
     }
 }
 
